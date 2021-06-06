@@ -26,7 +26,7 @@ date: 2020-10-27
     </div>
     <div>
         <canvas class="center map"></canvas>
-        <img class="chest" src="/assets/img/sprites/chests.png">
+        <!-- <img class="chest" src="/assets/img/sprites/chests.png"> -->
     </div>
 </div>
 
