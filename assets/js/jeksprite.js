@@ -1,4 +1,4 @@
-const SCALE = 2.5;
+const SCALE = 2;
 const WIDTH = 24;
 const HEIGHT = 32;
 const SCALED_WIDTH = SCALE * WIDTH;
@@ -9,7 +9,7 @@ const FACING_UP = 3;
 const FACING_LEFT = 1;
 const FACING_RIGHT = 2;
 const FRAME_LIMIT = 6;
-const MOVEMENT_SPEED = 5;
+const MOVEMENT_SPEED = 2;
 
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
@@ -20,11 +20,10 @@ let frameCount = 0;
 let positionX = 0;
 let positionY = 20;
 let img = new Image();
-let chest = '/img/sprites/chests.png'; //'/img/sprites/treasure-chest0000.png';
+let chest = '/assets/assets/img/sprites/chests.png'; //'/assets/img/sprites/treasure-chest0000.png';
 var executed = false;
 
-// let sprites = ['/img/sprites/gnome_soldier-SWEN.png', '/img/sprites/gnome-f-green_hat-SWEN.png','/img/sprites/gnome-f-red_hat-SWEN.png','/img/sprites/gnome-f-violet_hat-SWEN.png','/img/sprites/gnome-m-green_hat-SWEN.png','/img/sprites/gnome-m-red_hat-SWEN.png','/img/sprites/orig-green_cap-SWEN.png','/img/sprites/orig-red_cap-SWEN.png']
-let sprites = ['/img/sprites/orig-red_cap-SWEN.png']
+let sprites = ['/assets/img/sprites/orig-red_cap-SWEN.png']
 
 
 window.addEventListener("keydown", keyDownListener);
@@ -37,11 +36,8 @@ function keyUpListener(event) {
   keyPresses[event.key] = false;
 }
 
-function loadImage() {
-  var randomItem = sprites[Math.floor(Math.random()*sprites.length)];
-  console.log(randomItem);
-
-  img.src = randomItem;
+function loadImage(sprite) {
+  img.src = sprite;
   img.onload = function () {
     window.requestAnimationFrame(gameLoop);
   };
@@ -75,7 +71,6 @@ function drawChest(frameX, frameY, canvasX, canvasY) {
   );
 }
 
-
 loadImage();
 
 function gameLoop() {
@@ -97,6 +92,7 @@ function gameLoop() {
   } else if (keyPresses.ArrowRight || keyPresses.a || keyPresses.b || keyPresses.c || keyPresses.d || keyPresses.e || keyPresses.f || keyPresses.g || keyPresses.h || keyPresses.i || keyPresses.j || keyPresses.k || keyPresses.l || keyPresses.m || keyPresses.n || keyPresses.o || keyPresses.p || keyPresses.r || keyPresses.s || keyPresses.t || keyPresses.u || keyPresses.v || keyPresses.w || keyPresses.x || keyPresses.y || keyPresses.z || keyPresses.space ) {
     moveCharacter(MOVEMENT_SPEED, 0, FACING_RIGHT);
     hasMoved = true;
+  }
   // } else if (keyPresses.Meta || keyPresses.Shift){
   //   console.log('[DEBUG] AltRight Pressed')
   //   var x = document.getElementsByClassName("retrotype-banner")[0];
@@ -107,7 +103,6 @@ function gameLoop() {
   //   }
   //   openChest();
   // }
-
 
   if (hasMoved) {
     frameCount++;
@@ -131,11 +126,10 @@ function gameLoop() {
     positionY
   );
 
-
   window.requestAnimationFrame(gameLoop);
   console.log('[DEBUG] Sprite XLocation:'+positionX);
   // console.log('[DEBUG] Sprite YLocation:'+positionY);
-  if (positionX > 820) {
+  if (positionX > 248) {
     openChest();
     if (!executed) {
       executed = true;
@@ -193,8 +187,8 @@ var firstTime = true;
 
 function openChest() {
   var chest = document.getElementsByClassName("chest")[0];
-  if (chestClosed && positionX > 820) {
-      chest.src="/img/sprites/chests-closed.png";
+  if (chestClosed && positionX > 248) {
+      chest.src="/assets/img/sprites/chests-closed.png";
       console.log('[DEBUG] User Opened Chest!');
   
     var x = document.getElementsByClassName("retrotype-win")[0];
@@ -207,29 +201,29 @@ function openChest() {
 
   }
 
-  // if (chestClosed && positionX == 849) {
-  //   chest.src="/img/sprites/chests.png";
-  //   console.log('[DEBUG] User Opened Chest!');
+  if (chestClosed && positionX == 849) {
+    chest.src="/assets/img/sprites/chests.png";
+    console.log('[DEBUG] User Opened Chest!');
 
-  //   var x = document.getElementsByClassName("retrotype-win")[0];
-  //   if (x.style.display === "none") {
-  //     x.style.display = "block";
-  //   } else {
-  //     x.style.display = "none";
-  //   }  
-  //   chestClosed = false;
+    var x = document.getElementsByClassName("retrotype-win")[0];
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }  
+    chestClosed = false;
 
-  // } else  {
-  //   chest.src="/img/sprites/chests-closed.png";
-  //   console.log('[DEBUG] User Closed Chest!');
+  } else  {
+    chest.src="/assets/img/sprites/chests-closed.png";
+    console.log('[DEBUG] User Closed Chest!');
 
-  //   var x = document.getElementsByClassName("retrotype-win")[0];
-  //   if (x.style.display === "none") {
-  //     x.style.display = "block";
-  //   } else {
-  //     x.style.display = "none";
-  //   }  
+    var x = document.getElementsByClassName("retrotype-win")[0];
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }  
 
-  //   chestClosed = true;
-  // }
+    chestClosed = true;
+  }
 }
