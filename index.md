@@ -10,8 +10,13 @@ date: 2020-10-27
 <div class="pyro retrotype-win" style="display:block;"></div>
 <div>
     <div>
-        <p>controls</p>
-        <small>[shift] --> unlock chest<br>[arrows] --> L;R;U;D</small>
+        <p>Sprite Chosen:<span id="sprite-chosen"></span></p>
+            <small>
+                <i class="fas fa-arrow-left fa-sm"></i> A
+                <i class="fas fa-arrow-right fa-sm"></i> D
+                <i class="fas fa-arrow-up fa-sm"></i> W
+                <i class="fas fa-arrow-down fa-sm"></i> S
+            </small>
         <br><br><br>
         <small>
             <i class="fas fa-palette fa-sm" id="prvo"></i>
@@ -26,7 +31,6 @@ date: 2020-10-27
     </div>
     <div>
         <canvas class="center map"></canvas>
-        <!-- <img class="chest" src="/assets/img/sprites/chests.png"> -->
     </div>
 </div>
 
@@ -41,12 +45,16 @@ date: 2020-10-27
 
 <script>
 function changeSprite() {
-    let sprites = ['/assets/img/sprites/gnome_soldier-SWEN.png', '/assets/img/sprites/gnome-f-green_hat-SWEN.png','/assets/img/sprites/gnome-f-red_hat-SWEN.png','/assets/img/sprites/gnome-f-violet_hat-SWEN.png','/assets/img/sprites/gnome-m-green_hat-SWEN.png','/assets/img/sprites/gnome-m-red_hat-SWEN.png','/assets/img/sprites/orig-green_cap-SWEN.png','/assets/img/sprites/orig-red_cap-SWEN.png']
+    let sprites = ['/assets/img/sprites/Gnome Soldier.png', '/assets/img/sprites/gnome-f-green_hat-SWEN.png','/assets/img/sprites/gnome-f-red_hat-SWEN.png','/assets/img/sprites/gnome-f-violet_hat-SWEN.png','/assets/img/sprites/gnome-m-green_hat-SWEN.png','/assets/img/sprites/gnome-m-red_hat-SWEN.png','/assets/img/sprites/orig-green_cap-SWEN.png','/assets/img/sprites/orig-red_cap-SWEN.png']
 
     var randomItem = sprites[Math.floor(Math.random()*sprites.length)];
     console.log(randomItem);
     loadImage(randomItem);
     console.log('[DEBUG] Sprite Changed');
+
+    let name = randomItem.split("/",5)[4]
+    let final = name.split(".png",1);
+    document.getElementById('sprite-chosen').innerHTML = " " + final;
 }
 </script>
 

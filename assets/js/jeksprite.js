@@ -23,8 +23,6 @@ let img = new Image();
 let chest = '/assets/assets/img/sprites/chests.png'; //'/assets/img/sprites/treasure-chest0000.png';
 var executed = false;
 
-let sprites = ['/assets/img/sprites/orig-red_cap-SWEN.png']
-
 
 window.addEventListener("keydown", keyDownListener);
 function keyDownListener(event) {
